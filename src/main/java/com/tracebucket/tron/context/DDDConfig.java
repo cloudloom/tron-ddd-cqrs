@@ -10,22 +10,16 @@ import reactor.core.spec.Reactors;
 import reactor.spring.context.config.EnableReactor;
 
 /**
- * @author ffl
- * @since 08-04-2015
- * @version 0.1
+ * Created by ffl on 14-04-2015.
  */
-
 @Configuration
 @EnableReactor
 @EnableSpringConfigured
-@ComponentScan(basePackages = {"com.tracebucket.tron.cqrs.support"})
-public class TronConfig {
-
-    @Bean
-    public Reactor commandBus(Environment env) {
-        // implicit Environment is injected into bean def method
-        return Reactors.reactor().env(env).get();
-    }
-
-
+@ComponentScan(basePackages = {"com.tracebucket.tron.event", "com.tracebucket.tron.ddd.support", "com.tracebucket.tron.ddd.domain"})
+public class DDDConfig {
+	@Bean
+	public Reactor eventBus(Environment env) {
+		// implicit Environment is injected into bean def method
+		return Reactors.reactor().env(env).get();
+	}
 }
