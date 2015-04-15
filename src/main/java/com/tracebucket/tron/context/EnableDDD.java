@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import(TronConfig.class)
+@Import(DDDConfig.class)
 public @interface EnableDDD {
 
 }
