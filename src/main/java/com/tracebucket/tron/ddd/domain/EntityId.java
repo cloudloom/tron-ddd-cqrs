@@ -32,6 +32,10 @@ public class EntityId implements Serializable {
         return entityId;
     }
 
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
+
     @Override
     public int hashCode() {
         return entityId.hashCode();

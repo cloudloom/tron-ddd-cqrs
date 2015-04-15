@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+<!--    <mapping>
+        <class-a>com.tracebucket.tron.ddd.domain.BaseEntity</class-a>
+        <class-b>com.tracebucket.tron.assembler.BaseResource</class-b>
+        <field>
+            <a>entityId.entityId</a>
+            <b>uid</b>
+        </field>
+    </mapping>
+
+    <mapping>
+        <class-a>com.tracebucket.tron.ddd.domain.BaseAggregateRoot</class-a>
+        <class-b>com.tracebucket.tron.assembler.BaseResource</class-b>
+        <field>
+            <a>aggregateId.aggregateId</a>
+            <b>uid</b>
+        </field>
+    </mapping>-->
+
+</mappings>

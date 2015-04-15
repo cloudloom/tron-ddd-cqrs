@@ -31,7 +31,7 @@ public class OrganizationResourceAssembler extends ResourceAssembler<Organizatio
             organizationResource = resourceClass.newInstance();
             if (entity != null) {
                 organizationResource = new OrganizationResource();
-                organizationResource.setUid(entity.getAggregateId().getId());
+                organizationResource.setUid(entity.getAggregateId().getAggregateId());
                 organizationResource.setName(entity.getName());
                 organizationResource.setDescription(entity.getDescription());
                 organizationResource.setCode(entity.getCode());

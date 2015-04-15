@@ -29,7 +29,7 @@ public class ResourceAssembler<T extends BaseResource, E> {
         if(entity instanceof BaseEntity) {
             resource.setUid(((BaseEntity) entity).getEntityId().getId());
         } else if(entity instanceof BaseAggregateRoot) {
-            resource.setUid(((BaseAggregateRoot) entity).getAggregateId().getId());
+            resource.setUid(((BaseAggregateRoot) entity).getAggregateId().getAggregateId());
         }
         return resource;
     }

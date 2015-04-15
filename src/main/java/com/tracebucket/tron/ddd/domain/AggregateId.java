@@ -28,11 +28,15 @@ public class AggregateId implements Serializable{
 		return new AggregateId(UUID.randomUUID().toString());
 	}
 
-	public String getId() {
-		return aggregateId;
-	}
+    public void setAggregateId(String aggregateId) {
+        this.aggregateId = aggregateId;
+    }
 
-	@Override
+    public String getAggregateId() {
+        return aggregateId;
+    }
+
+    @Override
 	public int hashCode() {
 		return aggregateId.hashCode();
 	}
