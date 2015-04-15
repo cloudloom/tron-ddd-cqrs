@@ -1,6 +1,7 @@
 package com.tracebucket.tron.context;
 
 import com.tracebucket.tron.ddd.annotation.PersistChanges;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -44,7 +45,8 @@ public class AssemblerResolutionConfig implements ImportSelector{
 
 		@Bean
 		public BasePackageStore basePackages(){
-
+			log.info("Configuring Assembler Resolution ...");
+			log.info("Scanning for assemblers in " + StringUtils.join(assemblerPackages, ","));
 			BasePackageStore basePackageStore = new BasePackageStore();
 			basePackageStore.addAll(assemblerPackages);
 			return basePackageStore;
