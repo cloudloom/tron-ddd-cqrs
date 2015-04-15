@@ -1,7 +1,14 @@
 package com.tracebucket.tron.test.assembler.resolution;
 
 import com.tracebucket.tron.assembler.AssemblerResolver;
+import com.tracebucket.tron.assembler.ResourceAssembler;
 import com.tracebucket.tron.test.assembler.config.AssemblerTestConfig;
+import com.tracebucket.tron.test.assembler.fixture.OrganizationFixture;
+import com.tracebucket.tron.test.assembler.fixture.SaleChannelFixture;
+import com.tracebucket.tron.test.assembler.sample.Organization;
+import com.tracebucket.tron.test.assembler.sample.OrganizationResource;
+import com.tracebucket.tron.test.assembler.sample.SaleChannel;
+import com.tracebucket.tron.test.assembler.sample.SaleChannelResource;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,9 +31,19 @@ public class ResourceAssemblerTest {
 		Assert.assertNotNull(assemblerResolver);
 	}
 
+    @Test
+    public void testOrganizationResourceAssembler() {
+        ResourceAssembler resourceAssembler = assemblerResolver.resolveResourceAssembler(OrganizationResource.class, Organization.class);
+        Assert.assertNotNull(resourceAssembler);
+        OrganizationResource organizationResource = (OrganizationResource)resourceAssembler.toResource(OrganizationFixture.standardOrganization(), OrganizationResource.class);
+        Assert.assertNotNull(organizationResource);
+    }
 
-	/*@Configuration
-	@EnableAutoAssemblerResolution(basePackages = "com.tracebucket.tron.test.assembler.sample")
-	@ComponentScan(basePackages = {"com.tracebucket.tron.assembler"})
-	public static class SpringConfig {}*/
+    @Test
+    public void testResourceAssembler() {
+        ResourceAssembler resourceAssembler = assemblerResolver.resolveResourceAssembler(SaleChannelResource.class, SaleChannel.class);
+        Assert.assertNotNull(resourceAssembler);
+        SaleChannelResource saleChannelResource = (SaleChannelResource)resourceAssembler.toResource(SaleChannelFixture.standardSaleChannel(), SaleChannelResource.class);
+        Assert.assertNotNull(saleChannelResource);
+    }
 }

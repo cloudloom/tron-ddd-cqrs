@@ -52,11 +52,16 @@ public class AssemblerResolver {
                                 entityAssembler = (EntityAssembler) applicationContext.getBean(Introspector.decapitalize(clazz.getSimpleName()));
                             } catch (NoSuchBeanDefinitionException nsbde) {
                                 if(entityAssembler == null) {
-                                    Component component = (Component)clazz.getAnnotation(Component.class);
-                                    if(component.value() != null && component.value().length() > 0) {
-                                        entityAssembler = (EntityAssembler)applicationContext.getBean(component.value());
+                                    try {
+                                        Component component = (Component) clazz.getAnnotation(Component.class);
+                                        if (component.value() != null && component.value().length() > 0) {
+                                            entityAssembler = (EntityAssembler) applicationContext.getBean(component.value());
+                                        }
+                                    } catch (NoSuchBeanDefinitionException nsbdex) {
                                     }
                                 }
+                            } finally {
+                                break;
                             }
                         }
                     }
@@ -65,6 +70,12 @@ public class AssemblerResolver {
                 } catch (ClassCastException cce) {
 
                 }
+            }
+        }
+        if(entityAssembler == null) {
+            try {
+                entityAssembler = (EntityAssembler)applicationContext.getBean("entityAssembler");
+            }catch (NoSuchBeanDefinitionException nsbdex) {
             }
         }
         return entityAssembler;
@@ -86,11 +97,16 @@ public class AssemblerResolver {
                                 resourceAssembler = (ResourceAssembler) applicationContext.getBean(Introspector.decapitalize(clazz.getSimpleName()));
                             } catch (NoSuchBeanDefinitionException nsbde) {
                                 if(resourceAssembler == null) {
-                                    Component component = (Component)clazz.getAnnotation(Component.class);
-                                    if(component.value() != null && component.value().length() > 0) {
-                                        resourceAssembler = (ResourceAssembler)applicationContext.getBean(component.value());
+                                    try {
+                                        Component component = (Component) clazz.getAnnotation(Component.class);
+                                        if (component.value() != null && component.value().length() > 0) {
+                                            resourceAssembler = (ResourceAssembler) applicationContext.getBean(component.value());
+                                        }
+                                    } catch (NoSuchBeanDefinitionException nsbdex) {
                                     }
                                 }
+                            } finally {
+                                break;
                             }
                         }
                     }
@@ -101,40 +117,43 @@ public class AssemblerResolver {
                 }
             }
         }
+        if(resourceAssembler == null) {
+            try {
+                resourceAssembler = (ResourceAssembler) applicationContext.getBean("resourceAssembler");
+            }catch (NoSuchBeanDefinitionException nsbdex) {
+            }
+        }
         return resourceAssembler;
     }
 
     private List<String> resolveClasses() {
         List<String> classes = new ArrayList<String>();
-
-            if(basePackages != null && basePackages.getAll().size() > 0) {
-                PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-                MetadataReaderFactory readerFactory = new CachingMetadataReaderFactory(resolver);
-                for(String pkg : basePackages.getAll()) {
-                    String basePath = ClassUtils.convertClassNameToResourcePath(pkg);
-                    Resource[] resources = null;
-                    try {
-                        resources = resolver.getResources("classpath*:" + basePath + "/**/*.class");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    if(resources != null) {
-                        for (Resource resource : resources) {
-                            MetadataReader reader = null;
-                            try {
-                                reader = readerFactory.getMetadataReader(resource);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            if(reader != null) {
-                                classes.add(reader.getClassMetadata().getClassName());
-                            }
+        if(basePackages != null && basePackages.getAll().size() > 0) {
+            PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+            MetadataReaderFactory readerFactory = new CachingMetadataReaderFactory(resolver);
+            for(String pkg : basePackages.getAll()) {
+                String basePath = ClassUtils.convertClassNameToResourcePath(pkg);
+                Resource[] resources = null;
+                try {
+                    resources = resolver.getResources("classpath*:" + basePath + "/**/*.class");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if(resources != null) {
+                    for (Resource resource : resources) {
+                        MetadataReader reader = null;
+                        try {
+                            reader = readerFactory.getMetadataReader(resource);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        if(reader != null) {
+                            classes.add(reader.getClassMetadata().getClassName());
                         }
                     }
                 }
-
+            }
         }
         return classes;
     }
-
 }
