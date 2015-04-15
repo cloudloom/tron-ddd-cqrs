@@ -23,7 +23,7 @@ public class OrganizationUnitEntityAssembler extends EntityAssembler<Organizatio
     private AssemblerResolver assemblerResolver;
 
     public OrganizationUnit toEntity(OrganizationUnitResource resource, Class<OrganizationUnit> entityClass) {
-        OrganizationUnit organizationUnit = null;//new DozerBeanMapper().map(resource, entityClass);
+        OrganizationUnit organizationUnit = null;
         if(resource != null) {
             organizationUnit = new OrganizationUnit();
             if (resource.getUid() != null) {
