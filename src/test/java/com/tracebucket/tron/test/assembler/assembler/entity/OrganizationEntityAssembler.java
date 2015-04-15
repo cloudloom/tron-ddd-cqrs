@@ -1,10 +1,12 @@
 package com.tracebucket.tron.test.assembler.assembler.entity;
 
+import com.tracebucket.tron.assembler.AssemblerResolver;
 import com.tracebucket.tron.assembler.EntityAssembler;
 import com.tracebucket.tron.ddd.domain.AggregateId;
 import com.tracebucket.tron.test.assembler.sample.Organization;
 import com.tracebucket.tron.test.assembler.sample.OrganizationResource;
 import com.tracebucket.tron.test.assembler.sample.OrganizationUnit;
+import com.tracebucket.tron.test.assembler.sample.OrganizationUnitResource;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,13 +23,10 @@ import java.util.Set;
 public class OrganizationEntityAssembler extends EntityAssembler<Organization, OrganizationResource> {
 
     @Autowired
-    private Mapper mapper;
-
-    @Autowired
-    private OrganizationUnitEntityAssembler organizationUnitEntityAssembler;
+    private AssemblerResolver assemblerResolver;
 
     public Organization toEntity(OrganizationResource resource, Class<Organization> entityClass) {
-        Organization organization = null;//mapper.map(resource, entityClass);
+        Organization organization = null;
         if(resource != null) {
             organization = new Organization();
             if (resource.getUid() != null) {
@@ -38,7 +37,8 @@ public class OrganizationEntityAssembler extends EntityAssembler<Organization, O
             organization.setDescription(resource.getDescription());
             organization.setImage(resource.getImage());
             organization.setWebsite(resource.getWebsite());
-            organization.setOrganizationUnits(organizationUnitEntityAssembler.toEntities(resource.getOrganizationUnits(), OrganizationUnit.class));
+            organization.setOrganizationUnits(assemblerResolver.resolveEntityAssembler(OrganizationUnit.class, OrganizationUnitResource.class)
+                    .toEntities(resource.getOrganizationUnits(), OrganizationUnit.class));
         }
         return organization;
     }

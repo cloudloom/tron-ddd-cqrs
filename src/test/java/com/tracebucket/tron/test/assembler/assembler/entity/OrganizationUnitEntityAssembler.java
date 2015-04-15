@@ -1,11 +1,9 @@
 package com.tracebucket.tron.test.assembler.assembler.entity;
 
+import com.tracebucket.tron.assembler.AssemblerResolver;
 import com.tracebucket.tron.assembler.EntityAssembler;
 import com.tracebucket.tron.ddd.domain.EntityId;
-import com.tracebucket.tron.test.assembler.sample.BusinessLine;
-import com.tracebucket.tron.test.assembler.sample.Department;
-import com.tracebucket.tron.test.assembler.sample.OrganizationUnit;
-import com.tracebucket.tron.test.assembler.sample.OrganizationUnitResource;
+import com.tracebucket.tron.test.assembler.sample.*;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,14 +18,9 @@ import java.util.Set;
  */
 @Component
 public class OrganizationUnitEntityAssembler extends EntityAssembler<OrganizationUnit, OrganizationUnitResource> {
-   @Autowired
-    private Mapper mapper;
 
     @Autowired
-    private BusinessLineEntityAssembler businessLineEntityAssembler;
-
-    @Autowired
-    private DepartmentEntityAssembler departmentEntityAssembler;
+    private AssemblerResolver assemblerResolver;
 
     public OrganizationUnit toEntity(OrganizationUnitResource resource, Class<OrganizationUnit> entityClass) {
         OrganizationUnit organizationUnit = null;//new DozerBeanMapper().map(resource, entityClass);
@@ -39,8 +32,10 @@ public class OrganizationUnitEntityAssembler extends EntityAssembler<Organizatio
             organizationUnit.setName(resource.getName());
             organizationUnit.setDescription(resource.getDescription());
             organizationUnit.setOrganizationFunctions(resource.getOrganizationFunctions());
-            organizationUnit.setBusinessLines(businessLineEntityAssembler.toEntities(resource.getBusinessLines(), BusinessLine.class));
-            organizationUnit.setDepartments(departmentEntityAssembler.toEntities(resource.getDepartments(), Department.class));
+            organizationUnit.setBusinessLines(assemblerResolver.resolveEntityAssembler(BusinessLine.class, BusinessLineResource.class)
+                    .toEntities(resource.getBusinessLines(), BusinessLine.class));
+            organizationUnit.setDepartments(assemblerResolver.resolveEntityAssembler(Department.class, DepartmentResource.class)
+                    .toEntities(resource.getDepartments(), Department.class));
             organizationUnit.setChildren(toEntities(resource.getChildren(), OrganizationUnit.class));
             organizationUnit.setParent(toEntity(resource.getParent(), OrganizationUnit.class));
         }

@@ -1,5 +1,6 @@
 package com.tracebucket.tron.test.assembler.assembler.resource;
 
+import com.tracebucket.tron.assembler.AssemblerResolver;
 import com.tracebucket.tron.assembler.ResourceAssembler;
 import com.tracebucket.tron.test.assembler.sample.*;
 import org.dozer.Mapper;
@@ -16,15 +17,9 @@ import java.util.Set;
  */
 @Component
 public class OrganizationUnitResourceAssembler extends ResourceAssembler<OrganizationUnitResource, OrganizationUnit> {
-    @Autowired
-    private Mapper mapper;
 
     @Autowired
-    private BusinessLineResourceAssembler businessLineResourceAssembler;
-
-    @Autowired
-    private DepartmentResourceAssembler departmentResourceAssembler;
-
+    private AssemblerResolver assemblerResolver;
 
     @Override
     public OrganizationUnitResource toResource(OrganizationUnit entity, Class<OrganizationUnitResource> resourceClass) {
@@ -36,8 +31,10 @@ public class OrganizationUnitResourceAssembler extends ResourceAssembler<Organiz
                 organizationUnitResource.setUid(entity.getEntityId().getId());
                 organizationUnitResource.setName(entity.getName());
                 organizationUnitResource.setDescription(entity.getDescription());
-                organizationUnitResource.setBusinessLines(businessLineResourceAssembler.toResources(entity.getBusinessLines(), BusinessLineResource.class));
-                organizationUnitResource.setDepartments(departmentResourceAssembler.toResources(entity.getDepartments(), DepartmentResource.class));
+                organizationUnitResource.setBusinessLines(assemblerResolver.resolveResourceAssembler(BusinessLineResource.class, BusinessLine.class)
+                        .toResources(entity.getBusinessLines(), BusinessLineResource.class));
+                organizationUnitResource.setDepartments(assemblerResolver.resolveResourceAssembler(DepartmentResource.class, Department.class)
+                        .toResources(entity.getDepartments(), DepartmentResource.class));
                 organizationUnitResource.setChildren(toResources(entity.getChildren(), OrganizationUnitResource.class));
                 organizationUnitResource.setOrganizationFunctions(entity.getOrganizationFunctions());
                 organizationUnitResource.setParent(toResource(entity.getParent(), OrganizationUnitResource.class));
