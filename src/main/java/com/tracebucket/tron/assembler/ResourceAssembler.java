@@ -2,6 +2,7 @@ package com.tracebucket.tron.assembler;
 
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
@@ -13,7 +14,8 @@ import java.util.Set;
  * Date: 2/4/14
  * Time: 6:22 PM
  */
-public abstract class ResourceAssembler<T extends BaseResource, E> {
+@Component("resourceAssembler")
+public class ResourceAssembler<T extends BaseResource, E> {
     @Autowired
     private Mapper mapper;
 
@@ -22,14 +24,12 @@ public abstract class ResourceAssembler<T extends BaseResource, E> {
 
     }
 
-    public T toResource(E entity){
-        Class<T> resourceClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+    public T toResource(E entity, Class<T> resourceClass){
         T resource = mapper.map(entity, resourceClass);
         return resource;
     }
 
-    public Set<T> toResources(Collection<E> entities){
-        Class<T> resourceClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+    public Set<T> toResources(Collection<E> entities, Class<T> resourceClass){
         Set<T> resources = new HashSet<T>();
         for(E entity: entities){
             T resource = mapper.map(entity, resourceClass);

@@ -2,6 +2,7 @@ package com.tracebucket.tron.assembler;
 
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -12,7 +13,8 @@ import java.util.Set;
  * Date: 8/4/14
  * Time: 3:17 PM
  */
-public abstract class EntityAssembler<E, R extends BaseResource> {
+@Component("entityAssembler")
+public class EntityAssembler<E, R extends BaseResource> {
     @Autowired
     private Mapper mapper;
 

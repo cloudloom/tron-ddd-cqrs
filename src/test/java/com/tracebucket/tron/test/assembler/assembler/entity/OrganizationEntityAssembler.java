@@ -1,4 +1,4 @@
-package com.tracebucket.tron.test.assembler.assembler;
+package com.tracebucket.tron.test.assembler.assembler.entity;
 
 import com.tracebucket.tron.assembler.EntityAssembler;
 import com.tracebucket.tron.ddd.domain.AggregateId;
