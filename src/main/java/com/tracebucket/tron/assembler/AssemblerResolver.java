@@ -60,6 +60,8 @@ public class AssemblerResolver {
                                     } catch (NoSuchBeanDefinitionException nsbdex) {
                                     }
                                 }
+                            } finally {
+                                break;
                             }
                         }
                     }
@@ -103,6 +105,8 @@ public class AssemblerResolver {
                                     } catch (NoSuchBeanDefinitionException nsbdex) {
                                     }
                                 }
+                            } finally {
+                                break;
                             }
                         }
                     }
@@ -124,31 +128,31 @@ public class AssemblerResolver {
 
     private List<String> resolveClasses() {
         List<String> classes = new ArrayList<String>();
-            if(basePackages != null && basePackages.getAll().size() > 0) {
-                PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-                MetadataReaderFactory readerFactory = new CachingMetadataReaderFactory(resolver);
-                for(String pkg : basePackages.getAll()) {
-                    String basePath = ClassUtils.convertClassNameToResourcePath(pkg);
-                    Resource[] resources = null;
-                    try {
-                        resources = resolver.getResources("classpath*:" + basePath + "/**/*.class");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    if(resources != null) {
-                        for (Resource resource : resources) {
-                            MetadataReader reader = null;
-                            try {
-                                reader = readerFactory.getMetadataReader(resource);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            if(reader != null) {
-                                classes.add(reader.getClassMetadata().getClassName());
-                            }
+        if(basePackages != null && basePackages.getAll().size() > 0) {
+            PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+            MetadataReaderFactory readerFactory = new CachingMetadataReaderFactory(resolver);
+            for(String pkg : basePackages.getAll()) {
+                String basePath = ClassUtils.convertClassNameToResourcePath(pkg);
+                Resource[] resources = null;
+                try {
+                    resources = resolver.getResources("classpath*:" + basePath + "/**/*.class");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if(resources != null) {
+                    for (Resource resource : resources) {
+                        MetadataReader reader = null;
+                        try {
+                            reader = readerFactory.getMetadataReader(resource);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        if(reader != null) {
+                            classes.add(reader.getClassMetadata().getClassName());
                         }
                     }
                 }
+            }
         }
         return classes;
     }
