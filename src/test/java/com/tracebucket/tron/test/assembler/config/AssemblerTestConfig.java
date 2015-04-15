@@ -17,14 +17,4 @@ import org.springframework.test.context.ContextConfiguration;
 @ComponentScan(basePackages = {"com.tracebucket.tron.test.assembler"})
 public class AssemblerTestConfig {
 
-    @Bean
-    public Mapper mapper() {
-        return new DozerBeanMapper();
-    }
-
-    @Bean
-    public ObjectMapper objectMapper()
-    {
-        return new ObjectMapper();
-    }
 }
