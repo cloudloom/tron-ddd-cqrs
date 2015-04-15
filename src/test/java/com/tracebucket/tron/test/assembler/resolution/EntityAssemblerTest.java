@@ -2,9 +2,7 @@ package com.tracebucket.tron.test.assembler.resolution;
 
 import com.tracebucket.tron.assembler.AssemblerResolver;
 import com.tracebucket.tron.assembler.EntityAssembler;
-import com.tracebucket.tron.assembler.ResourceAssembler;
 import com.tracebucket.tron.test.assembler.config.AssemblerTestConfig;
-import com.tracebucket.tron.test.assembler.fixture.OrganizationFixture;
 import com.tracebucket.tron.test.assembler.fixture.OrganizationResourceFixture;
 import com.tracebucket.tron.test.assembler.fixture.SaleChannelResourceFixture;
 import com.tracebucket.tron.test.assembler.sample.Organization;
