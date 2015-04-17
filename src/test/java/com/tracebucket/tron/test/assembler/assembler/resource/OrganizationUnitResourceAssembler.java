@@ -3,7 +3,6 @@ package com.tracebucket.tron.test.assembler.assembler.resource;
 import com.tracebucket.tron.assembler.AssemblerResolver;
 import com.tracebucket.tron.assembler.ResourceAssembler;
 import com.tracebucket.tron.test.assembler.sample.*;
-import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
