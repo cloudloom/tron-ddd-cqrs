@@ -18,7 +18,6 @@ public class MapperConfig {
     @Bean
     public Mapper mapper() {
         DozerBeanMapper mapper = new DozerBeanMapper();
-        //mapper.addMapping(this.getClass().getClassLoader().getResourceAsStream("dozermapping.xml"));
         mapper.setMappingFiles(Arrays.asList(new String[] {"dozermapping.xml"}));
         return mapper;
     }
