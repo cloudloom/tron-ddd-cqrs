@@ -44,4 +44,11 @@ public abstract class BaseEntity implements Serializable{
     public Object getId() {
         return entityId;
     }
+
+    @PrePersist
+    public void initEntityId() {
+        if(this.entityId == null) {
+            this.entityId = EntityId.generate();
+        }
+    }
 }

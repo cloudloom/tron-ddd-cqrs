@@ -1,6 +1,9 @@
 package com.tracebucket.tron.test.assembler.builder;
 
+import com.tracebucket.tron.ddd.domain.EntityId;
 import com.tracebucket.tron.test.assembler.sample.SaleChannel;
+
+import java.util.UUID;
 
 /**
  * Created by sadath on 14-Apr-15.
@@ -29,6 +32,7 @@ public class SaleChannelBuilder {
         SaleChannel saleChannel = new SaleChannel();
         saleChannel.setName(name);
         saleChannel.setDescription(description);
+        saleChannel.setEntityId(new EntityId(UUID.randomUUID().toString()));
         return saleChannel;
     }
 }

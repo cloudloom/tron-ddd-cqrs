@@ -15,7 +15,7 @@ import java.util.Set;
 /**
  * Created by sadath on 31-Mar-15.
  */
-@Component
+//@Component
 public class OrganizationUnitEntityAssembler extends EntityAssembler<OrganizationUnit, OrganizationUnitResource> {
 
     @Autowired

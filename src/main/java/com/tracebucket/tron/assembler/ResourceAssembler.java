@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 /**
  * User: ffl
@@ -26,19 +27,13 @@ public class ResourceAssembler<T extends BaseResource, E> {
 
     public T toResource(E entity, Class<T> resourceClass){
         T resource = mapper.map(entity, resourceClass);
-        if(entity instanceof BaseEntity) {
-            resource.setUid(((BaseEntity) entity).getEntityId().getId());
-        } else if(entity instanceof BaseAggregateRoot) {
-            resource.setUid(((BaseAggregateRoot) entity).getAggregateId().getAggregateId());
-        }
         return resource;
     }
 
     public Set<T> toResources(Collection<E> entities, Class<T> resourceClass){
         Set<T> resources = new HashSet<T>();
-        for(E entity: entities){
-            resources.add(toResource(entity, resourceClass));
-        }
+        Stream<E> stream = entities.parallelStream();
+        stream.forEach(t -> resources.add(toResource(t, resourceClass)));
         return resources;
     }
 }

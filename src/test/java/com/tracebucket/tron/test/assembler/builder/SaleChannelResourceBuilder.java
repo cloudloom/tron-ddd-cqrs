@@ -2,6 +2,8 @@ package com.tracebucket.tron.test.assembler.builder;
 
 import com.tracebucket.tron.test.assembler.sample.SaleChannelResource;
 
+import java.util.UUID;
+
 /**
  * Created by sadath on 14-Apr-15.
  */
@@ -29,6 +31,7 @@ public class SaleChannelResourceBuilder {
         SaleChannelResource saleChannel = new SaleChannelResource();
         saleChannel.setName(name);
         saleChannel.setDescription(description);
+        saleChannel.setUid(UUID.randomUUID().toString());
         return saleChannel;
     }
 }

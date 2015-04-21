@@ -99,4 +99,11 @@ public abstract class  BaseAggregateRoot {
     public void setAggregateId(AggregateId aggregateId) {
         this.aggregateId = aggregateId;
     }
+
+    @PrePersist
+    public void initAggregateId() {
+        if(this.aggregateId == null) {
+            this.aggregateId = AggregateId.generate();
+        }
+    }
 }

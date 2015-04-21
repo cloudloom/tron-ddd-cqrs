@@ -3,11 +3,11 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
 
-<!--    <mapping>
+    <mapping>
         <class-a>com.tracebucket.tron.ddd.domain.BaseEntity</class-a>
         <class-b>com.tracebucket.tron.assembler.BaseResource</class-b>
         <field>
-            <a>entityId.entityId</a>
+            <a>entityId</a>
             <b>uid</b>
         </field>
     </mapping>
@@ -16,9 +16,9 @@
         <class-a>com.tracebucket.tron.ddd.domain.BaseAggregateRoot</class-a>
         <class-b>com.tracebucket.tron.assembler.BaseResource</class-b>
         <field>
-            <a>aggregateId.aggregateId</a>
+            <a>aggregateId</a>
             <b>uid</b>
         </field>
-    </mapping>-->
+    </mapping>
 
 </mappings>

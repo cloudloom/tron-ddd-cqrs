@@ -31,11 +31,12 @@ public class EntityAssemblerTest {
     }
 
     @Test
-         public void testOrganizationEntityAssembler() {
+    public void testOrganizationEntityAssembler() {
         EntityAssembler entityAssembler = assemblerResolver.resolveEntityAssembler(Organization.class, OrganizationResource.class);
         Assert.assertNotNull(entityAssembler);
         Organization organization = (Organization)entityAssembler.toEntity(OrganizationResourceFixture.standardOrganization(), Organization.class);
         Assert.assertNotNull(organization);
+        Assert.assertNotNull(organization.getAggregateId());
     }
 
     @Test
@@ -44,6 +45,7 @@ public class EntityAssemblerTest {
         Assert.assertNotNull(entityAssembler);
         SaleChannel saleChannel = (SaleChannel)entityAssembler.toEntity(SaleChannelResourceFixture.standardSaleChannel(), SaleChannel.class);
         Assert.assertNotNull(saleChannel);
+        Assert.assertNotNull(saleChannel.getEntityId());
     }
 
 }

@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,9 +18,8 @@ public class MapperConfig {
     @Bean
     public Mapper mapper() {
         DozerBeanMapper mapper = new DozerBeanMapper();
-        List<String> dozerMappingFiles = new ArrayList<String>();
-        dozerMappingFiles.add("dozermapping.xml");
-        mapper.setMappingFiles(dozerMappingFiles);
+        //mapper.addMapping(this.getClass().getClassLoader().getResourceAsStream("dozermapping.xml"));
+        mapper.setMappingFiles(Arrays.asList(new String[] {"dozermapping.xml"}));
         return mapper;
     }
 }

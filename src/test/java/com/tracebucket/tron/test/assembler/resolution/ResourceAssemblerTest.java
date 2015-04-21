@@ -44,5 +44,6 @@ public class ResourceAssemblerTest {
         Assert.assertNotNull(resourceAssembler);
         SaleChannelResource saleChannelResource = (SaleChannelResource)resourceAssembler.toResource(SaleChannelFixture.standardSaleChannel(), SaleChannelResource.class);
         Assert.assertNotNull(saleChannelResource);
+        Assert.assertNotNull(saleChannelResource.getUid());
     }
 }
