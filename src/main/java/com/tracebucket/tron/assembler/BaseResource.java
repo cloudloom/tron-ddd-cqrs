@@ -1,5 +1,6 @@
 package com.tracebucket.tron.assembler;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -16,6 +17,7 @@ public abstract class BaseResource implements Serializable {
 
     protected String uid;
 
+    @JsonIgnore
     protected boolean passive;
 
     public String getUid() {
