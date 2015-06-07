@@ -12,3 +12,6 @@ Features
   - Assembler resolver to scan class path and find if an assebler is implemented to convert Entity to Resource of vice versa. 
   - If an Assembler is not implemented, create one at runtime. 
  - Request mapping over riding 
+ - 
+ 
+For more details check https://github.com/tracebucket/tron-ddd-cqrs/wiki
