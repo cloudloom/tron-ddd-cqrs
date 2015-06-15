@@ -1,6 +1,6 @@
 package com.tracebucket.tron.context;
 
-import com.tracebucket.tron.rest.validation.TronControllerAdvisor;
+import com.tracebucket.tron.rest.validation.TronExceptionAdvisor;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.ElementType;
@@ -13,6 +13,6 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import(TronControllerAdvisor.class)
+@Import(TronExceptionAdvisor.class)
 public @interface EnableExceptionAdvice {
 }

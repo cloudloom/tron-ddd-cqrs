@@ -24,13 +24,13 @@ import java.util.Locale;
  * @since 14/06/15
  */
 @ControllerAdvice
-public class TronControllerAdvisor {
-    private final Logger log = LoggerFactory.getLogger(TronControllerAdvisor.class);
+public class TronExceptionAdvisor {
+    private final Logger log = LoggerFactory.getLogger(TronExceptionAdvisor.class);
 
     private MessageSource messageSource;
 
     @Autowired
-    public TronControllerAdvisor(MessageSource messageSource){
+    public TronExceptionAdvisor(MessageSource messageSource){
         this.messageSource = messageSource;
     }
 
