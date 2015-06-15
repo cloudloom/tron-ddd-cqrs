@@ -1,5 +1,6 @@
 package com.tracebucket.tron.endpoint;
 
+import com.google.common.collect.Sets;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
@@ -9,7 +10,6 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 import java.lang.reflect.Method;
 import java.util.Set;
-import com.google.common.collect.Sets;
 
 /**
  * Created by ffl on 15-04-2015.

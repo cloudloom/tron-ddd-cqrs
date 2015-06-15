@@ -1,7 +1,5 @@
 package com.tracebucket.tron.assembler;
 
-import com.tracebucket.tron.ddd.domain.BaseAggregateRoot;
-import com.tracebucket.tron.ddd.domain.BaseEntity;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -6,7 +6,7 @@
 
     <groupId>com.tracebucket.tron</groupId>
     <artifactId>tron-ddd-cqrs</artifactId>
-    <version>0.6</version>
+    <version>0.7</version>
     <packaging>jar</packaging>
     <name>Tron</name>
     <description>A DDD CQRS Experiment</description>

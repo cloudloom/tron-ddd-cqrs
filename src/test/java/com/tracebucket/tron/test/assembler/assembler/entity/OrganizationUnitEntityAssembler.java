@@ -5,7 +5,6 @@ import com.tracebucket.tron.assembler.EntityAssembler;
 import com.tracebucket.tron.ddd.domain.EntityId;
 import com.tracebucket.tron.test.assembler.sample.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.HashSet;
