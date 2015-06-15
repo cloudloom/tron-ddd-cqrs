@@ -7,11 +7,11 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 /**
  * Created by sadath on 15-Jun-2015.
  */
-public class NonExistingControllerAdviceBeans implements Condition {
-    private static final String CONTROLLER_ADVICE_CONFIGURATION_BEAN_NAME = "controllerAdviceConfiguration";
+public class NonExistingExceptionAdviceBeans implements Condition {
+    private static final String EXCEPTION_ADVICE_CONFIGURATION_BEAN_NAME = "exceptionAdviceConfiguration";
 
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-        return !context.getBeanFactory().containsBean(CONTROLLER_ADVICE_CONFIGURATION_BEAN_NAME);
+        return !context.getBeanFactory().containsBean(EXCEPTION_ADVICE_CONFIGURATION_BEAN_NAME);
     }
 }
