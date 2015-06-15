@@ -1,4 +1,6 @@
 
+[ ![Download](https://api.bintray.com/packages/tracebucket/X1/tron-ddd-cqrs/images/download.svg) ](https://bintray.com/tracebucket/X1/tron-ddd-cqrs/_latestVersion)
+
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/tracebucket/tron-ddd-cqrs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # tron-ddd-cqrs
