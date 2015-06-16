@@ -4,6 +4,7 @@ import com.tracebucket.tron.ddd.domain.BaseAggregateRoot;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
@@ -85,5 +86,19 @@ public class BaseAggregateRepositoryImpl<T extends BaseAggregateRoot, ID extends
     }
 
 
+    @Override
+    public T findOne(ID id, String tenantId) {
+        List<T> result = entityManager.createQuery("Select a from " + entityInformation.getEntityName() + " a where a.owner.tenantId = " + tenantId +" and a.aggregateId = "+ id)
+                .getResultList();
+        if(result != null && result.size() == 1) {
+            return result.get(0);
+        }
+        return null;
+    }
 
+    @Override
+    public List<T> findAll(String tenantId) {
+        return entityManager.createQuery("Select a from " + entityInformation.getEntityName() + " a where a.owner.tenantId = " + tenantId)
+                .getResultList();
+    }
 }
