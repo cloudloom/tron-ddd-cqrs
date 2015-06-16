@@ -17,6 +17,7 @@ import java.util.List;
 
 @NoRepositoryBean
 public interface BaseAggregateRepository<T extends BaseAggregateRoot, ID extends Serializable> extends JpaRepository<T, ID> {
+    public void delete(ID id, String tenantId);
     public T findOne(ID id, String tenantId);
     public List<T> findAll(String tenantId);
 }

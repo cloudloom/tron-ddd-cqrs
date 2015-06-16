@@ -85,10 +85,34 @@ public class BaseAggregateRepositoryImpl<T extends BaseAggregateRoot, ID extends
         return aggregate;
     }
 
+    /**
+     * Delete Based On Tenant Id
+     * @param id  primary key
+     * @param tenantId  tenantId
+     * @return void
+     */
+    @Override
+    public void delete(ID id, String tenantId) {
+        List<T> result = entityManager.createQuery("Select a from " + entityInformation.getEntityName() + " a where a.owner.organizationUID = '" + tenantId +"' and a.aggregateId.aggregateId = '"+ id + "'")
+                .getResultList();
+        if(result != null && result.size() == 1) {
+            T entity = result.get(0);
+            if(entity != null) {
+                entity.setPassive(true);
+                save(entity);
+            }
+        }
+    }
 
+    /**
+     * Find Based On Tenant Id
+     * @param id  primary key
+     * @param tenantId  tenantId
+     * @return found entity instance
+     */
     @Override
     public T findOne(ID id, String tenantId) {
-        List<T> result = entityManager.createQuery("Select a from " + entityInformation.getEntityName() + " a where a.owner.tenantId = " + tenantId +" and a.aggregateId = "+ id)
+        List<T> result = entityManager.createQuery("Select a from " + entityInformation.getEntityName() + " a where a.owner.organizationUID = '" + tenantId +"' and a.aggregateId.aggregateId = '"+ id + "'")
                 .getResultList();
         if(result != null && result.size() == 1) {
             return result.get(0);
@@ -96,9 +120,14 @@ public class BaseAggregateRepositoryImpl<T extends BaseAggregateRoot, ID extends
         return null;
     }
 
+    /**
+     * Find All Based On Tenant Id
+     * @param tenantId  tenantId
+     * @return list of all found entity instances
+     */
     @Override
     public List<T> findAll(String tenantId) {
-        return entityManager.createQuery("Select a from " + entityInformation.getEntityName() + " a where a.owner.tenantId = " + tenantId)
+        return entityManager.createQuery("Select a from " + entityInformation.getEntityName() + " a where a.owner.organizationUID = '" + tenantId + "'")
                 .getResultList();
     }
 }
