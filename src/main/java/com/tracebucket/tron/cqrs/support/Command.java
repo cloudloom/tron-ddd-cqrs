@@ -1,8 +1,8 @@
 package com.tracebucket.tron.cqrs.support;
 
 import org.springframework.data.annotation.Id;
-import reactor.event.Event;
-import reactor.function.Consumer;
+import reactor.bus.Event;
+import reactor.fn.Consumer;
 
 import java.util.Date;
 import java.util.UUID;

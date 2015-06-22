@@ -17,14 +17,14 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 
 @Component
-public class EventRegistryImpl implements EventRegistry{
-    private static Logger log = LoggerFactory.getLogger(EventRegistryImpl.class);
+public class DomainEventRegistryImpl implements DomainEventRegistry {
+    private static Logger log = LoggerFactory.getLogger(DomainEventRegistryImpl.class);
 
     private ConcurrentHashMap<String, HashSet<EventModel>> eventModelMap = new ConcurrentHashMap<String, HashSet<EventModel>>(0);
 
 
 
-    public EventRegistryImpl(){
+    public DomainEventRegistryImpl(){
 
     }
 

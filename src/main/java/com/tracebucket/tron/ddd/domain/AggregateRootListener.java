@@ -1,7 +1,7 @@
 package com.tracebucket.tron.ddd.domain;
 
-import com.tracebucket.tron.ddd.support.EventRegistry;
-import com.tracebucket.tron.event.EventHandlerHelper;
+import com.tracebucket.tron.ddd.support.DomainEventRegistry;
+import com.tracebucket.tron.event.DomainEventPublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,22 +27,22 @@ public class AggregateRootListener extends AuditingEntityListener {
     private AutowireCapableBeanFactory spring;
 
     @Autowired
-    private EventHandlerHelper eventHandlerHelper;
+    private DomainEventPublisher domainEventPublisher;
 
     @Autowired
-    private EventRegistry eventRegistry;
+    private DomainEventRegistry domainEventRegistry;
 
     @PostPersist
     @PostUpdate
     public void publishEvents(BaseAggregateRoot aggregateRoot){
 
-        Set<EventModel> eventModels = eventRegistry.events(aggregateRoot);
+        Set<EventModel> eventModels = domainEventRegistry.events(aggregateRoot);
         eventModels.stream()
                 .forEach(eventModel -> {
-                    eventHandlerHelper.notify(eventModel.getEvent(), eventModel);
+                    domainEventPublisher.notify(eventModel.getEvent(), eventModel);
                     log.info("Publishing event " + eventModel.getEvent()+ " for " + eventModel.getAggregateRoot().getClass().getSimpleName() + " having instance " + eventModel.getAggregateRoot().instanceId());
                 });
-        eventRegistry.deleteInstanceEvents(aggregateRoot);
+        domainEventRegistry.deleteInstanceEvents(aggregateRoot);
 
     }
 

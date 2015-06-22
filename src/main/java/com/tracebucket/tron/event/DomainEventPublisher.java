@@ -5,8 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import reactor.core.Reactor;
-import reactor.event.Event;
+import reactor.bus.Event;
+import reactor.bus.EventBus;
 
 import java.util.Map;
 
@@ -17,28 +17,28 @@ import java.util.Map;
  */
 
 @Component
-public class EventHandlerHelper {
-    private static Logger log = LoggerFactory.getLogger(EventHandlerHelper.class);
+public class DomainEventPublisher {
+    private static Logger log = LoggerFactory.getLogger(DomainEventPublisher.class);
 
     @Autowired
-    private Reactor eventBus;
+    private EventBus domainEventBus;
 
     public DomainEvent result(String event, Object o, Command command){
         DomainEvent domainEvent = DomainEvent.wrap(o)
                 .from(command);
-        eventBus.notify(event, domainEvent);
+        domainEventBus.notify(event, domainEvent);
         return domainEvent;
     }
 
     public DomainEvent notify(String name, Object o){
         DomainEvent domainEvent = DomainEvent.wrap(o);
-        eventBus.notify(name, domainEvent);
+        domainEventBus.notify(name, domainEvent);
         return domainEvent;
     }
 
     public void notify(Map<String, Event> events){
         for(String key: events.keySet()){
-            eventBus.notify(key, events.get(key));
+            domainEventBus.notify(key, events.get(key));
             log.info("Publishing event " + key + " " + events.get(key).toString());
         }
     }

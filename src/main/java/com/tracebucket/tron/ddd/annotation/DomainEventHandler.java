@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tracebucket.tron.cqrs.annotation;
+package com.tracebucket.tron.ddd.annotation;
+
+import com.tracebucket.tron.cqrs.annotation.SelectorType;
 
 import java.lang.annotation.*;
 
@@ -26,7 +28,7 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
-public @interface CommandHandler {
+public @interface DomainEventHandler {
 
 	/**
 	 * An expression that evaluates to a {@link reactor.bus.selector.Selector} to register

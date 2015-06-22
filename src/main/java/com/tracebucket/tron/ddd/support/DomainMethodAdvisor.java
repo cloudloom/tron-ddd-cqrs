@@ -27,7 +27,7 @@ public class DomainMethodAdvisor {
     private static Logger log = LoggerFactory.getLogger(DomainMethodAdvisor.class);
 
     @Autowired
-    private EventRegistry eventRegistry;
+    private DomainEventRegistry domainEventRegistry;
 
 
 
@@ -58,7 +58,7 @@ public class DomainMethodAdvisor {
 
         BaseAggregateRoot aggregateRoot = (BaseAggregateRoot) joinPoint.getTarget();
         log.info("Intercepting domain method to publish event " + event + " for " + aggregateRoot.getClass().getSimpleName() + " with instance ID = " + aggregateRoot.instanceId());
-        eventRegistry.addEvent(aggregateRoot, event);
+        domainEventRegistry.addEvent(aggregateRoot, event);
 
 
     }

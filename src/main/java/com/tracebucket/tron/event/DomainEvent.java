@@ -1,8 +1,8 @@
 package com.tracebucket.tron.event;
 
 import com.tracebucket.tron.cqrs.support.Command;
-import reactor.event.Event;
-import reactor.function.Consumer;
+import reactor.bus.Event;
+import reactor.fn.Consumer;
 
 import java.util.Date;
 
@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class DomainEvent<T> extends Event<T> {
 
-    private static final String prefix = "Event|";
+    private static final String prefix = "DomainEvent|";
 
 
 

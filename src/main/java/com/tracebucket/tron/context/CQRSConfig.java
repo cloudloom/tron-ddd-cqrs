@@ -4,10 +4,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.aspectj.EnableSpringConfigured;
-import reactor.core.Environment;
-import reactor.core.Reactor;
-import reactor.core.spec.Reactors;
-import reactor.spring.context.config.EnableReactor;
+import reactor.Environment;
+import reactor.bus.EventBus;
+
 
 /**
  * @author ffl
@@ -16,15 +15,15 @@ import reactor.spring.context.config.EnableReactor;
  */
 
 @Configuration
-@EnableReactor
+@EnableEventBus
 @EnableSpringConfigured
 @ComponentScan(basePackages = {"com.tracebucket.tron.cqrs.support"})
-public class TronConfig {
+public class CQRSConfig {
 
     @Bean
-    public Reactor commandBus(Environment env) {
+    public EventBus commandBus(Environment env) {
         // implicit Environment is injected into bean def method
-        return Reactors.reactor().env(env).get();
+        return EventBus.create(env, Environment.THREAD_POOL);
     }
 
 

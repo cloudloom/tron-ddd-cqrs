@@ -12,7 +12,7 @@ import java.util.Set;
  * @version 0.1
  */
 
-public interface EventRegistry {
+public interface DomainEventRegistry {
     public void addEvent(BaseAggregateRoot aggregateRoot, String event);
     public Set<EventModel> events(BaseAggregateRoot aggregateRoot);
     public void deleteInstanceEvents(BaseAggregateRoot aggregateRoot);

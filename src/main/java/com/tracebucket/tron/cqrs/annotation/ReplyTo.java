@@ -18,7 +18,7 @@ package com.tracebucket.tron.cqrs.annotation;
 import java.lang.annotation.*;
 
 /**
- * Placed on a method to denote that it is an event handler.
+ * Indicate a method return is to be sent to the key referenced by the given expression.
  *
  * @author Jon Brisbin
  * @author Stephane Maldini
@@ -26,31 +26,14 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
-public @interface CommandHandler {
+public @interface ReplyTo {
 
 	/**
-	 * An expression that evaluates to a {@link reactor.bus.selector.Selector} to register
-     * this handler with the {@link
-	 * reactor.bus.EventBus}.
-	 * If empty, consumer will be subscribed on the global reactor selector
-	 * {@link reactor.bus.EventBus#on(reactor.bus.selector.Selector selector, reactor.fn.Consumer)}
+	 * An expression which evaluates to a key to which is sent the method return value.
+	 * If empty, consumer will try to use {@link reactor.bus.Event#getReplyTo()} header.
 	 *
-	 * @return An expression to be evaluated.
+	 * @return The expression.
 	 */
 	String value() default "";
-
-	/**
-	 * An expression that evaluates to the {@link reactor.bus.EventBus} on which to place this handler.
-	 *
-	 * @return An expression to be evaluated.
-	 */
-	String eventBus() default "eventBus";
-
-	/**
-	 * The type of {@link reactor.bus.selector.Selector} to register.
-	 *
-	 * @return The type of the {@link reactor.bus.selector.Selector}.
-	 */
-	SelectorType type() default SelectorType.OBJECT;
 
 }
