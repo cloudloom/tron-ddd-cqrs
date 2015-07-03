@@ -30,7 +30,7 @@ public class ResourceAssembler<T extends BaseResource, E> {
 
     public Set<T> toResources(Collection<E> entities, Class<T> resourceClass){
         Set<T> resources = new HashSet<T>();
-        Stream<E> stream = entities.parallelStream();
+        Stream<E> stream = entities.stream();
         stream.forEach(t -> resources.add(toResource(t, resourceClass)));
         return resources;
     }
