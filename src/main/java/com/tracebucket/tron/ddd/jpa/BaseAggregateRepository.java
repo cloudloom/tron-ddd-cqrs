@@ -2,9 +2,7 @@ package com.tracebucket.tron.ddd.jpa;
 
 import com.tracebucket.tron.ddd.domain.BaseAggregateRoot;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.NoRepositoryBean;
-import org.springframework.data.repository.query.Param;
 
 import java.io.Serializable;
 import java.util.List;
