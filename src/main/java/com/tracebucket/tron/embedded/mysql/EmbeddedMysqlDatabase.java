@@ -1,15 +1,9 @@
 package com.tracebucket.tron.embedded.mysql;
 
-import com.mysql.management.MysqldResource;
-import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import java.io.IOException;
-
 public class EmbeddedMysqlDatabase extends DriverManagerDataSource {
-    private final Logger logger = LoggerFactory.getLogger(EmbeddedMysqlDatabase.class);
+/*    private final Logger logger = LoggerFactory.getLogger(EmbeddedMysqlDatabase.class);
     private final MysqldResource mysqldResource;
 
     public EmbeddedMysqlDatabase(MysqldResource mysqldResource) {
@@ -28,5 +22,5 @@ public class EmbeddedMysqlDatabase extends DriverManagerDataSource {
                 }
             }
         }
-    }
+    }*/
 }

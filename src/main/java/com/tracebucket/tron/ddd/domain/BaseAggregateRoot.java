@@ -1,6 +1,7 @@
 package com.tracebucket.tron.ddd.domain;
 
 import com.tracebucket.tron.ddd.exception.DomainOperationException;
+import com.tracebucket.tron.enums.converter.AggregateStatusConverter;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -27,12 +28,10 @@ public abstract class  BaseAggregateRoot {
 		  @AttributeOverride(name = "aggregateId", column = @Column(name = "ID", nullable = false))})
 	protected AggregateId aggregateId;
 
-
-
 	@Version
 	private Long version;
 
-	@Enumerated(EnumType.ORDINAL)
+    @Convert(converter = AggregateStatusConverter.class)
 	private AggregateStatus aggregateStatus = AggregateStatus.ACTIVE;
 
     @Transient

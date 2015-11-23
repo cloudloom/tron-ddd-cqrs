@@ -1,23 +1,10 @@
 package com.tracebucket.tron.embedded.mysql;
 
-import com.mysql.management.MysqldResource;
-import com.mysql.management.MysqldResourceI;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
-
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by sadath on 09-Nov-2015.
  */
 public class EmbeddedMysqlDatabaseBuilder {
-    private final Logger LOG = LoggerFactory.getLogger(EmbeddedMysqlDatabaseBuilder.class);
+/*    private final Logger LOG = LoggerFactory.getLogger(EmbeddedMysqlDatabaseBuilder.class);
 
     private final String baseDatabaseDir = System.getProperty("java.io.tmpdir");
     private String databaseName;
@@ -103,20 +90,20 @@ public class EmbeddedMysqlDatabaseBuilder {
         return this;
     }
 
-    /**
+    *//**
      * whether to enable mysql foreign key check
      *
      * @param foreignKeyCheck
-     */
+     *//*
     public EmbeddedMysqlDatabaseBuilder setForeignKeyCheck(boolean foreignKeyCheck) {
         this.foreignKeyCheck = foreignKeyCheck;
         return this;
     }
 
-    /**
+    *//**
      * @param databaseName
      *            the databaseName to set
-     */
+     *//*
     public final void setDatabaseName(String databaseName) {
         this.databaseName = databaseName;
     }
@@ -131,5 +118,5 @@ public class EmbeddedMysqlDatabaseBuilder {
             e.printStackTrace();
         }
         return database;
-    }
+    }*/
 }
