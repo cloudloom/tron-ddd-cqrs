@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.data.repository.core.RepositoryInformation;
 import org.springframework.data.repository.core.RepositoryMetadata;
 import org.springframework.data.repository.core.support.RepositoryFactorySupport;
 
@@ -45,11 +46,11 @@ public class CustomRepositoryFactoryBean <R extends JpaRepository<T, I>, T, I ex
        }*/
 
        @Override
-       protected <T, ID extends Serializable> SimpleJpaRepository<?, ?> getTargetRepository(RepositoryMetadata metadata, EntityManager entityManager) {
-           JpaEntityInformation<?, Serializable> entityInformation = getEntityInformation(metadata.getDomainType());
-           if(metadata.getDomainType().getGenericSuperclass().getTypeName().equals(BaseAggregateRoot.class.getTypeName())) {
+       protected <T, ID extends Serializable> SimpleJpaRepository<?, ?> getTargetRepository(RepositoryInformation information, EntityManager entityManager) {
+           JpaEntityInformation<?, Serializable> entityInformation = getEntityInformation(information.getDomainType());
+           if(information.getDomainType().getGenericSuperclass().getTypeName().equals(BaseAggregateRoot.class.getTypeName())) {
                return new BaseAggregateRepositoryImpl(entityInformation, entityManager);
-           } else if(metadata.getDomainType().getGenericSuperclass().getTypeName().equals(BaseEntity.class.getTypeName())) {
+           } else if(information.getDomainType().getGenericSuperclass().getTypeName().equals(BaseEntity.class.getTypeName())) {
                return new SimpleJpaRepository(entityInformation, entityManager);
            }
            return new SimpleJpaRepository(entityInformation, entityManager);
