@@ -7,7 +7,7 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 /**
  * Created by ffl on 28-05-2015.
  */
-public class NonExistingStagingProdBeans implements Condition {
+public class NonExistingJpaStagingBeans implements Condition {
 	private static final String JPA_STAGING_CONFIGURATION_BEAN_NAME = "jpaStagingConfiguration";
 
 	@Override
